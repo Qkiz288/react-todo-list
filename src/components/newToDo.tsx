@@ -1,6 +1,10 @@
 import React, { useRef } from "react";
 
-const NewToDo: React.FC = () => {   
+type NewToDoProps = {
+    onAddToDo: (text: string) => void;
+}
+
+const NewToDo: React.FC<NewToDoProps> = props => {   
 
     const textInputRef = useRef<HTMLInputElement>(null);
 
@@ -8,6 +12,7 @@ const NewToDo: React.FC = () => {
         event.preventDefault();
         const enteredText = textInputRef.current!.value;
         console.log(enteredText);
+        props.onAddToDo(enteredText);
     };
 
     return <form onSubmit={toDoSubmitHandler}>
